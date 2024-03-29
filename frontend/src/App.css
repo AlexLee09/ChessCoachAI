@@ -1,5 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Forum&display=swap');
+
+
 .App {
   text-align: center;
   background-color: var(--bg);
+  font-family: "Forum", serif;
+   
 }
 
+body
+{
+  font-family: "Forum", serif;
+}
+
+h1 {
+  font-family: "Forum", serif;
+}
+
+button{
+  font-family: "Forum", serif;
+  /* color: var(--clickable1) */
+
+}
+
+input
+{
+  font-family: "Forum", serif;
+  padding-left: 10px;
+}
