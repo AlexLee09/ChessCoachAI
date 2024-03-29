@@ -34,6 +34,16 @@ function LoginPage() {
         const data = await response.json();
         
         console.log(data);
+
+        if (data.status === "ERROR")
+        {
+            alert (data.message); 
+            return; 
+        }
+
+        alert ("User logged in successfully"); 
+
+        navigate ("/dashboard")
     }
     
     const handleSignup = async (event) => {
@@ -42,6 +52,12 @@ function LoginPage() {
         if (newPassword != newConfirmPassword){
             alert ("Passwords do not match");
             return;
+        }
+
+        if (newEmail === "" || newUsername === "" || newPassword === "" || newConfirmPassword === "")
+        {
+            alert ("All fields required");  
+            return; 
         }
 
         const newDataToSend = {
@@ -60,6 +76,16 @@ function LoginPage() {
         const dataSignup = await responseSignup.json();
 
         console.log(dataSignup);
+
+        if (dataSignup.status === "ERROR")
+        {
+            alert (dataSignup.message); 
+            return; 
+        }
+
+        // alert ("User signed up successfully"); 
+
+        navigate ("/dashboard")
     }
 
 
