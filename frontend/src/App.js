@@ -4,8 +4,22 @@ import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 import Navbar from './components/Navbar';
+import React, { useEffect } from 'react'; 
 
 function App() {
+  useEffect(() => 
+  {
+    const checkLogin = async() => 
+    {
+      const response = await fetch ("http://localhost:3001/user/get"); 
+      const data = await response.json();
+
+      console.log (data); 
+    }
+
+    checkLogin(); 
+  }, []); 
+
   return (
     <Router>
       <Navbar />
