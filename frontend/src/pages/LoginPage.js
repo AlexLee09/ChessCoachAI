@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import classes from './LoginPage.module.css';
+import UserContext from '../store/UserContext';
 
 function LoginPage() {
     const navigate = useNavigate();
 
+    const { user, setUser } = useContext(UserContext); 
    
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -44,6 +46,8 @@ function LoginPage() {
         alert ("User logged in successfully"); 
 
         navigate ("/dashboard")
+
+        setUser(data.user);
     }
     
     const handleSignup = async (event) => {
@@ -86,6 +90,8 @@ function LoginPage() {
         // alert ("User signed up successfully"); 
 
         navigate ("/dashboard")
+
+        setUser(dataSignup.user); 
     }
 
 
