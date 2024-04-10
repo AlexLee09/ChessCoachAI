@@ -1,7 +1,6 @@
 require('dotenv').config()
 
 const express = require('express');
-const cors = require('cors');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const mongoStore = require("connect-mongo"); 
@@ -13,24 +12,14 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cors());
-
-app.use(
-    session({
-        secret: process.env.SESSION_SECRET,
-        resave: false,
-        saveUninitialized: true,
-        // store: mongoStore.create({
-        //     mongoUrl: process.env.MONGODB_URI,
-        // }),
-        cookie: { secure: false }
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    store: mongoStore.create({
+        mongoUrl: process.env.MONGODB_URI, 
     })
-);
-
-mongoose.set('strictQuery', false);
-mongoose.connect (process.env.MONGODB_URI)
-    .then(() => console.log("CONNECTED TO DB"))
-    .catch((error) => console.error(error));
+}));
 
 app.post("/user/new", async(req, res) => 
 {
@@ -52,8 +41,6 @@ app.post("/user/new", async(req, res) =>
             email: email, 
             password: password,
         }); 
-
-        console.log ("Created new user with username: " + username); 
 
         req.session.userId = newUser._id; 
 
@@ -88,9 +75,6 @@ app.post("/user/login", async(req, res) =>
 
         req.session.userId = user._id.toString(); 
 
-        console.log ("SAVING:")
-        console.log (req.session)
-
         const dataToSend = {
             status: "SUCCESS", 
             message: "User logged in successfully",
@@ -110,9 +94,6 @@ app.get("/user/get", async(req, res) =>
 {
     try
     {
-        console.log ("LOADING:")
-        console.log (req.session);
-
         const userId = req.session.userId; 
 
         if (!userId)
@@ -197,8 +178,10 @@ app.get("/dashboard/getAllGames", async (req, res) => {
 });
 
 
-
-
+mongoose.set('strictQuery', false);
+mongoose.connect (process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log("CONNECTED TO DB"))
+    .catch((error) => console.error(error));
 
 const PORT = process.env.PORT; 
 app.listen(PORT, () => // fire up express server

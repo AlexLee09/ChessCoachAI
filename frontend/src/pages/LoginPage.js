@@ -24,7 +24,7 @@ function LoginPage() {
         }
 
         
-        const response = await fetch("http://localhost:3001/user/login",
+        const response = await fetch("/user/login",
         {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -66,7 +66,7 @@ function LoginPage() {
             password: newPassword
         }
 
-        const responseSignup = await fetch("http://localhost:3001/user/new",
+        const responseSignup = await fetch("/user/new",
         {
             method: 'POST',
             headers: { 'Content-Type': 'application/json'},

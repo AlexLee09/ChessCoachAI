@@ -11,7 +11,7 @@ function App() {
   {
     const checkLogin = async() => 
     {
-      const response = await fetch ("http://localhost:3001/user/get"); 
+      const response = await fetch ("/user/get"); 
       const data = await response.json();
 
       console.log (data); 
