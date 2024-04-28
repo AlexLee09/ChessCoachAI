@@ -3,8 +3,10 @@ import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-route
 import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
+import AnalysisPage from './pages/AnalysisPage';
 import Navbar from './components/Navbar';
 import React, { useEffect, useState, useMemo } from 'react';
+import {Chessboard} from "react-chessboard"
 
 import UserContext from './store/UserContext';
 
@@ -54,6 +56,7 @@ function App()
                     <Route path="/" element={<LandingPage />} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/dashboard" element={<DashboardPage />} />
+                    <Route path = "/analysis" element = {<AnalysisPage/>} />
                 </Routes>
             </Router>
         </UserContext.Provider>
